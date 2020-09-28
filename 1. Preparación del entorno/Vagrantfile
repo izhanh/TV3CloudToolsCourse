@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+  # Get main VM image
+  config.vm.box = "http://vm-dev.pub.dtvc.local/secavm.0.2032.1.box"
+  config.vm.box_check_update = true
+
+  # Folder configuration
+  config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+  config.vm.synced_folder 'D:/vm/shared', '/home/dev/shared', type: 'nfs'
+  config.vm.synced_folder 'D:/vm/repository', '/home/dev/.m2/repository', type: 'nfs'
+ 
+  # Port configuration
+  config.vm.hostname = "secavm"
+  config.vm.network :private_network, ip: "192.168.56.104" # Red VPN
+  config.vm.network "forwarded_port", guest: 22, host: 2222 # SSH Port
+  config.vm.network "forwarded_port", guest: 3128, host: 3128 # Proxy port
+  config.vm.network "forwarded_port", guest: 8080, host: 8080 # HTTP access port (Jenkins)
+ 
+  # Plugin config
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = "http://proxy-test.pub.dtvc.local:3128/"
+    config.proxy.https    = "http://proxy-test.pub.dtvc.local:3128/"
+    config.proxy.no_proxy = "localhost,127.0.0.1"
+  end
+
+  # Provider (VirtualBox) config
+  config.vm.provider :virtualbox do |v|
+    v.memory = 1024
+    v.cpus = 1
+  end
+ 
+end
