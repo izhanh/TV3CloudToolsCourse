@@ -1,0 +1,11 @@
+aws elasticache create-replication-group \
+--replication-group-id curs-tutorial \
+--replication-group-description "Example Curs" \
+--num-node-groups 3 \
+--cache-node-type cache.t2.micro \
+--cache-parameter-group default.redis5.0.cluster.on \
+--engine redis \
+--engine-version 5.0.3 \
+--security-group-ids sg-077020e23a1ef79d5 \
+--node-group-configuration \
+--region eu-west-1
