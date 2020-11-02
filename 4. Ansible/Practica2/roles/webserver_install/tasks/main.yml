@@ -6,18 +6,18 @@
 - name: Copy nginx html template
   template:
     src: index.nginx.html.j2
-    dest: "/var/www/html/index.nginx.html"
+    dest: "/var/www/html/index.nginx-debian.html"
     owner: "{{ ssh_user  }}"
     group: "{{ ssh_user  }}"
 
 - name: Add one line with lineinfile
-  lineinfile: dest="/var/www/html/index.nginx.html" line="<h2>Hola a todos!</h2>" insertafter="Bienvenidos"
+  lineinfile: dest="/var/www/html/index.nginx-debian.html" line="<h2>Hola a todos!</h2>" insertafter="Bienvenidos"
   become: yes
 
 - name: Add one block with blockinfile
   become: yes
   blockinfile:
-    dest: "/var/www/html/index.nginx.html"
+    dest: "/var/www/html/index.nginx-debian.html"
     marker: "<!--- {mark} ANSIBLE MANAGED BLOCK NGINX --->"
     insertafter: "Bienvenidos"
     block: |
