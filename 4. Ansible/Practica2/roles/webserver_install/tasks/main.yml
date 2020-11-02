@@ -1,0 +1,26 @@
+---
+- name: Install nginx
+  apt: name=nginx state=latest
+  become: yes
+
+- name: Copy nginx html template
+  template:
+    src: index.nginx.html.j2
+    dest: "/var/www/html/index.nginx.html"
+    owner: "{{ ssh_user  }}"
+    group: "{{ ssh_user  }}"
+
+- name: Add one line with lineinfile
+  lineinfile: dest="/var/www/html/index.nginx.html" line="<h2>Hola a todos!</h2> insertafter="Bienvenidos"
+  become=yes
+
+- name: Add one block with blockinfile
+  become: yes
+  blockinfile:
+    dest: "/var/www/html/index.nginx.html"
+    marker: "<!--- {mark} ANSIBLE MANAGED BLOCK NGINX --->"
+    insertafter: "Bienvenidos"
+    block: |
+      <h2>Bloque de block in file</h2>
+  
+

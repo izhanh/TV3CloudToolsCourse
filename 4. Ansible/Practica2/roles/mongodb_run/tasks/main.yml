@@ -1,0 +1,7 @@
+---
+
+- name: Start MongoDB
+  service:
+    name: mongodb
+    state: started
+  become: yes

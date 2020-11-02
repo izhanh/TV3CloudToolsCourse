@@ -1,0 +1,16 @@
+---
+- name: Install nginx
+  remote_user: ubuntu
+  hosts: webserver
+  become: true
+
+  tasks:
+    - name: Install NGiNX from apt
+      apt:
+        name: nginx
+        state: latest
+
+    - name: Start NGiNX
+      service:
+        name: nginx
+        state: started
