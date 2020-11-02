@@ -1,10 +1,11 @@
 ---
 - name: Upgrade all packages to latest version
   apt:
-    name: "*"
-    state: latest
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
   become: yes
 
 - name: Install MongoDB
-  apt: name=mongodb-org state=latest
+  apt: name=mongodb state=latest
   become: yes
