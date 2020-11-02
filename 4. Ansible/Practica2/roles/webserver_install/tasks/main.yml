@@ -11,7 +11,7 @@
     group: "{{ ssh_user  }}"
 
 - name: Add one line with lineinfile
-  lineinfile: dest="/var/www/html/index.nginx.html" line="<h2>Hola a todos!</h2> insertafter="Bienvenidos"
+  lineinfile: dest="/var/www/html/index.nginx.html" line="<h2>Hola a todos!</h2>" insertafter="Bienvenidos"
   become: yes
 
 - name: Add one block with blockinfile
