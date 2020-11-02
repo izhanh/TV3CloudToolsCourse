@@ -1,5 +1,4 @@
 ---
-
 - hosts: webserver
   remote_user: "{{ ssh_user }}"
   become: yes
@@ -12,6 +11,6 @@
   remote_user: "{{ ssh_user }}"
   become: yes
   serial: "100%"
-  role:
+  roles:
     - role: mongodb_install
     - role: mongodb_run
