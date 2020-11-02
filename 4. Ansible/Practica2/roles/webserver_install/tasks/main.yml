@@ -12,7 +12,7 @@
 
 - name: Add one line with lineinfile
   lineinfile: dest="/var/www/html/index.nginx.html" line="<h2>Hola a todos!</h2> insertafter="Bienvenidos"
-  become=yes
+  become: yes
 
 - name: Add one block with blockinfile
   become: yes
@@ -22,5 +22,3 @@
     insertafter: "Bienvenidos"
     block: |
       <h2>Bloque de block in file</h2>
-  
-
